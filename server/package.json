@@ -1,0 +1,42 @@
+{
+  "name": "quick",
+  "version": "0.0.1",
+  "description": "Backend for quick payments system",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
+    "seed": "knex seed:run",
+    "lint": "eslint --fix src",
+    "test": "mocha --exit"
+  },
+  "keywords": [],
+  "author": "Tyler Myracle",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tmyracle/quick"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.5",
+    "morgan": "^1.10.0",
+    "objection": "^2.2.3",
+    "pg": "^8.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "mocha": "^8.1.2",
+    "nodemon": "^2.0.4",
+    "supertest": "^4.0.2"
+  }
+}
