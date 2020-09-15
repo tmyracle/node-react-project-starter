@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "title": "Profile",
+  "description": "Payments profile",
+  "required": [],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "integer",
+      "title": "The database ID of the user."
+    },
+    "default_billing_address": {
+      "$id": "#/properties/default_billing_address",
+      "type": "integer",
+      "title": "The database ID of the default billing address"
+    },
+    "default_email": {
+      "$id": "#/properties/default_email",
+      "type": "string",
+      "title": "The default email address of the user"
+    },
+    "default_payment_method": {
+      "$id": "#/properties/default_payment_method",
+      "type": "integer",
+      "title": "The database ID of the default payment method"
+    },
+    "default_shipping_address": {
+      "$id": "#/properties/default_shipping_address",
+      "type": "integer",
+      "title": "The database ID of the default shipping address"
+    },
+    "created_at": {
+      "$id": "#/properties/created_at",
+      "type": "string",
+      "title": "The creation date of the user."
+    },
+    "updated_at": {
+      "$id": "#/properties/updated_at",
+      "type": "string",
+      "title": "The date the user was last updated."
+    }
+  }
+}

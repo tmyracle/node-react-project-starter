@@ -30,6 +30,8 @@ router.post("/", async (req, res, next) => {
     is_giftcard,
     last_4,
     zipcode,
+    payment_method_id,
+    user_id,
   } = req.body;
 
   try {
@@ -42,6 +44,8 @@ router.post("/", async (req, res, next) => {
       is_giftcard,
       last_4,
       zipcode,
+      payment_method_id,
+      user_id,
     };
 
     const newCard = await Card.query().insert(card);

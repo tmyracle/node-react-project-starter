@@ -35,6 +35,8 @@ router.post("/", async (req, res, next) => {
     postal_code,
     region,
     type,
+    profile_id,
+    user_id,
   } = req.body;
 
   try {
@@ -48,6 +50,8 @@ router.post("/", async (req, res, next) => {
       postal_code,
       region,
       type,
+      profile_id,
+      user_id,
     };
 
     const newAddress = await Address.query().insert(address);

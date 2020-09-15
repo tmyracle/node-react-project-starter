@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("../../lib/jwt");
 const User = require("../users/users.model");
+const Profile = require("../profiles/profiles.model");
 
 const router = express.Router();
 
@@ -10,11 +11,18 @@ router.post("/start", async (req, res, next) => {
   try {
     let currentUser = await User.query().where("email", email).first();
     if (!currentUser) {
-      //create the user and save to db
+      //create a profile and user and save to db
+      const profile = {
+        default_email: email,
+      };
+
+      newProfile = await Profile.query().insert(profile);
+
       const newUser = {
         email,
         first_name,
         last_name,
+        profile_id: newProfile.id,
       };
       currentUser = await User.query().insert(newUser);
     }
@@ -42,12 +50,16 @@ router.post("/confirm", async (req, res, next) => {
     const user = await User.query().where("email", email).first();
 
     if (!user) {
+      const error = new Error("Could not find user with that email address.");
       res.sendStatus(403);
+      throw error;
     }
 
     const validCode = await bcrypt.compare(code, user.code);
     if (!validCode) {
+      const error = new Error("Invalid code provided");
       res.sendStatus(403);
+      throw error;
     }
 
     const payload = {

@@ -9,7 +9,9 @@
     "locality",
     "postal_code",
     "region",
-    "type"
+    "type",
+    "profile_id",
+    "user_id"
   ],
   "additionalProperties": false,
   "properties": {
@@ -69,6 +71,16 @@
       "type": "string",
       "title": "What type of address it is",
       "examples": ["ADDRESS_TYPE_SHIPPING", "ADDRESS_TYPE_BILLING"]
+    },
+    "profile_id": {
+      "$id": "#/properties/profile_id",
+      "type": "integer",
+      "title": "The id of the profile."
+    },
+    "user_id": {
+      "$id": "#/properties/user_id",
+      "type": "integer",
+      "title": "The id of the user."
     },
     "created_at": {
       "$id": "#/properties/created_at",
