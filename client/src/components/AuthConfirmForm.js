@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Input, Button, Icon, Form } from "semantic-ui-react";
+import React, { useState } from "react";
+import { Icon, Form } from "semantic-ui-react";
 import axios from "axios";
 
 const AuthConfirmForm = (props) => {
@@ -16,15 +16,13 @@ const AuthConfirmForm = (props) => {
       code: verificationCode,
     };
 
-    console.log(payload);
-
     const res = await axios.post(
       `http://${process.env.REACT_APP_API_DOMAIN}/api/v1/auth/confirm`,
       payload
     );
 
     if (res.status === 200) {
-      const { user, token } = res.data;
+      const { token } = res.data;
       localStorage.setItem("token", token);
       window.location.replace(
         `http://${process.env.REACT_APP_CLIENT_DOMAIN}/dashboard`
@@ -32,8 +30,6 @@ const AuthConfirmForm = (props) => {
     } else {
       console.log(res);
     }
-
-    console.log(res);
   };
 
   return (

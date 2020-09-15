@@ -3,17 +3,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import "semantic-ui-css/semantic.min.css";
 import App from "./App";
-import { Auth0Provider } from "@auth0/auth0-react";
+import { AuthProvider } from "./lib/authHandler";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-  <Auth0Provider
-    domain="dev-ibwe2tdf.us.auth0.com"
-    clientId="id1ya6SKlwac5sNYMCyVnOy4ozV2Htpn"
-    redirectUri={window.location.origin}
-  >
+  <AuthProvider>
     <App />
-  </Auth0Provider>,
+  </AuthProvider>,
   document.getElementById("root")
 );
 

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Input, Button, Icon, Form } from "semantic-ui-react";
+import React, { useState } from "react";
 import AuthLoginForm from "../components/AuthLoginForm";
 import AuthConfirmForm from "../components/AuthConfirmForm";
 
@@ -14,7 +13,7 @@ const LogIn = () => {
 
   return (
     <div className="max-w-lg mx-auto mt-24">
-      {authStep == 0 ? (
+      {authStep === 0 ? (
         <AuthLoginForm onChange={handleChange} />
       ) : (
         <AuthConfirmForm email={email} />

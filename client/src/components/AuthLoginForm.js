@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Input, Button, Icon, Form } from "semantic-ui-react";
+import React, { useState } from "react";
+import { Icon, Form } from "semantic-ui-react";
 import axios from "axios";
 
 const AuthLoginForm = (props) => {

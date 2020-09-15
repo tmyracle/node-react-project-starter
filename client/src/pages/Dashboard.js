@@ -1,9 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useAuth } from "../lib/authHandler";
 
 const Dashboard = () => {
-  const [user, setUser] = useState();
+  const { user } = useAuth();
 
-  return <div>Welcome to the dashboard!</div>;
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      Welcome to the dashboard {user.first_name} {user.last_name}!
+    </div>
+  );
 };
 
 export default Dashboard;

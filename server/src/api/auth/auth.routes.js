@@ -1,8 +1,10 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
+const jsonWebToken = require("jsonwebtoken");
 const jwt = require("../../lib/jwt");
 const User = require("../users/users.model");
 const Profile = require("../profiles/profiles.model");
+const { authenticateToken } = require("../../middlewares");
 
 const router = express.Router();
 
@@ -11,7 +13,6 @@ router.post("/start", async (req, res, next) => {
   try {
     let currentUser = await User.query().where("email", email).first();
     if (!currentUser) {
-      //create a profile and user and save to db
       const profile = {
         default_email: email,
       };
@@ -74,6 +75,55 @@ router.post("/confirm", async (req, res, next) => {
       user: payload,
       token,
     });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/is_authenticated", async (req, res, next) => {
+  try {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    if (token == null) res.json({ isAuthenticated: false });
+
+    jsonWebToken.verify(token, process.env.JWT_SECRET_TOKEN, (err, user) => {
+      if (err) res.json({ isAuthenticated: false });
+      res.json({ isAuthenticated: true });
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/current_user", authenticateToken, async (req, res, next) => {
+  try {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    if (token == null) {
+      const error = new Error("No token provided");
+      next(error);
+    }
+    jsonWebToken.verify(
+      token,
+      process.env.JWT_SECRET_TOKEN,
+      async (err, decoded) => {
+        if (err) {
+          next(err);
+        }
+        const user = await User.query()
+          .findById(decoded.id)
+          .select(
+            "id",
+            "first_name",
+            "last_name",
+            "date_of_birth",
+            "profile_id",
+            "created_at",
+            "updated_at"
+          );
+        res.json({ user });
+      }
+    );
   } catch (error) {
     next(error);
   }
