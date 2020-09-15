@@ -24,6 +24,8 @@
 
 /client/.env
 
+/client/src/*.output.css
+
 
 # SERVER SIDE
 
