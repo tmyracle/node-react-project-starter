@@ -31,6 +31,11 @@
       "type": "integer",
       "title": "The database ID of the default shipping address"
     },
+    "default_phone_number": {
+      "$id": "#/properties/default_phone_number",
+      "type": "string",
+      "title": "The default phone number for the profile"
+    },
     "created_at": {
       "$id": "#/properties/created_at",
       "type": "string",

@@ -24,7 +24,20 @@ router.get("/:id", async (req, res, next) => {
       .andWhere("id", req.params.id)
       .withGraphFetched("payment_methods.card")
       .withGraphFetched("addresses")
-      .withGraphFetched("user")
+      .withGraphFetched("user(limitedData)")
+      .modifiers({
+        limitedData(builder) {
+          builder.select(
+            "id",
+            "first_name",
+            "last_name",
+            "email",
+            "date_of_birth",
+            "created_at",
+            "updated_at"
+          );
+        },
+      })
       .first();
     res.json(profile);
   } catch (error) {

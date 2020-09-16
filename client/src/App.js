@@ -14,7 +14,7 @@ import Profile from "./pages/Profile";
 import { useAuth } from "./lib/authHandler";
 
 const App = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
 
   return (
     <div>
@@ -24,9 +24,7 @@ const App = () => {
             <Route path="/dashboard">
               <Dashboard />
             </Route>
-            <Route path="/profile">
-              <Profile />
-            </Route>
+            <Route path="/profile">{user && <Profile user={user} />}</Route>
             <Route path="/*">
               <Redirect to="/dashboard" />
             </Route>

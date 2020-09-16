@@ -116,6 +116,7 @@ router.get("/current_user", authenticateToken, async (req, res, next) => {
             "id",
             "first_name",
             "last_name",
+            "email",
             "date_of_birth",
             "profile_id",
             "created_at",
