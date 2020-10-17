@@ -1,13 +1,11 @@
-# quick
-Gotta go quick
+# Manager Tools
 
-Payments and passwordless auth proof of concept build on the following stack:
-* Express / NodeJS backend
-* Postgres 
-* React
-* Stripe for card handling
-* VGS for PCI compliance and security
+A collection of tools to help managers operate more efficiently:
 
+- Express / NodeJS backend
+- Postgres
+- React
+- Stripe for payments (maybe)
 
 Database is run using a docker image.  
-API is not containerized at this point.  
+API is not containerized at this point.
