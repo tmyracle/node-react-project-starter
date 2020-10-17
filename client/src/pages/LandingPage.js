@@ -9,7 +9,8 @@ const LandingPage = () => {
   return (
     <div className="max-w-2xl mx-auto mt-24 text-center">
       <div className="text-2xl mb-6">
-        <span className="font-bold">Quick:</span> the world's quickest checkout.
+        <span className="font-bold">Manager Tools:</span> a collection of
+        helpful tools for managers.
       </div>
       {!isAuthenticated && (
         <Button as={Link} to="/login">

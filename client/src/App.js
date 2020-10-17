@@ -10,7 +10,6 @@ import {
 import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
 import LogIn from "./pages/LogIn";
-import Profile from "./pages/Profile";
 import { useAuth } from "./lib/authHandler";
 
 const App = () => {
@@ -24,7 +23,6 @@ const App = () => {
             <Route path="/dashboard">
               <Dashboard />
             </Route>
-            <Route path="/profile">{user && <Profile user={user} />}</Route>
             <Route path="/*">
               <Redirect to="/dashboard" />
             </Route>

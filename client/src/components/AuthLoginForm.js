@@ -42,10 +42,10 @@ const AuthLoginForm = (props) => {
     <div className="p-6 login-container bg-white rounded-lg shadow-lg">
       <div className="login-header mb-6 justify-between overflow-hidden">
         <span className="text-xl font-bold" style={{ lineHeight: "42px" }}>
-          Quick Login
+          Manager Tools Login
         </span>
         <div className="logo rounded-full h-12 w-12 flex items-center justify-center bg-black text-white float-right">
-          <span className="text-xs font-bold">Quick</span>
+          <span className="text-xs font-bold">MT</span>
         </div>
       </div>
       <Form onSubmit={handleSubmit}>
@@ -85,7 +85,7 @@ const AuthLoginForm = (props) => {
         </div>
         <Form.Button fluid type="submit" color="black">
           <Icon name="lock" style={{ borderColor: "white", opacity: 1 }} />{" "}
-          Quick Login
+          Login
         </Form.Button>
       </Form>
     </div>

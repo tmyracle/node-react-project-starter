@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const jsonWebToken = require("jsonwebtoken");
 const jwt = require("../../lib/jwt");
 const User = require("../users/users.model");
-const Profile = require("../profiles/profiles.model");
 const { authenticateToken } = require("../../middlewares");
 
 const router = express.Router();
@@ -13,12 +12,6 @@ router.post("/start", async (req, res, next) => {
   try {
     let currentUser = await User.query().where("email", email).first();
     if (!currentUser) {
-      const profile = {
-        default_email: email,
-      };
-
-      newProfile = await Profile.query().insert(profile);
-
       const newUser = {
         email,
         first_name,
@@ -118,7 +111,6 @@ router.get("/current_user", authenticateToken, async (req, res, next) => {
             "last_name",
             "email",
             "date_of_birth",
-            "profile_id",
             "created_at",
             "updated_at"
           );
