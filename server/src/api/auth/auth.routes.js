@@ -16,10 +16,11 @@ router.post("/start", async (req, res, next) => {
         email,
         first_name,
         last_name,
-        profile_id: newProfile.id,
       };
       currentUser = await User.query().insert(newUser);
     }
+
+    console.log(currentUser);
 
     const code = Math.floor(Math.random() * (999999 - 100001) + 100000);
     console.log(`Here is your one time use code: ${code}`);

@@ -106,3 +106,5 @@
 # Docker local data
 
 /server/docker-data
+
+/node_modules

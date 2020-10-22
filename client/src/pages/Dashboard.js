@@ -19,8 +19,8 @@ const Dashboard = () => {
         Welcome, {user.first_name}!
       </div>
       <div className="text-center">
-        <Button as={Link} to="/profile" color="black">
-          Manage Profile
+        <Button as={Link} to="/account" color="black">
+          Manage Account
         </Button>
       </div>
     </div>
