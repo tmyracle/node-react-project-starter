@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Button, Form, Icon } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import { useAuth } from "../lib/authHandler";
+import { Form, Input, Button } from "antd";
+//import { Link } from "react-router-dom";
+//import { useAuth } from "../lib/authHandler";
 
 const Account = (props) => {
   const [firstName, setFirstName] = useState(props.user.first_name);
@@ -12,8 +12,9 @@ const Account = (props) => {
     console.log("I'm gonna cancel the form action.");
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (values) => {
     console.log("Gonna submit the form now!");
+    console.log(values);
   };
 
   if (!props.user) {
@@ -22,52 +23,52 @@ const Account = (props) => {
 
   return (
     <div className="p-6 bg-white rounded-lg max-w-lg mx-auto mt-24">
-      <div className="profile-img-placeholder text-center">
-        <Icon name="user" style={{ borderColor: "white", opacity: 1 }} />
-      </div>
       <div className="text-center text-2xl font-bold mb-6">
         Welcome, {firstName}!
       </div>
       <div className="text-center">
-        <Form size="big" onSubmit={handleSubmit}>
-          <Form.Group>
-            <Form.Input
-              width={8}
-              placeholder="First Name"
-              name="firstName"
-              value={firstName}
+        <Form
+          size="big"
+          initialValues={{
+            firstName,
+            lastName,
+            email,
+          }}
+          onFinish={handleSubmit}
+        >
+          <Form.Item name="firstName">
+            <Input
+              placeholder="First name"
               onChange={(e) => {
                 setFirstName(e.target.value);
               }}
             />
-            <Form.Input
-              width={8}
-              placeholder="Last Name"
-              name="lastName"
-              value={lastName}
+          </Form.Item>
+          <Form.Item name="lastName">
+            <Input
+              placeholder="Last name"
               onChange={(e) => {
                 setLastName(e.target.value);
               }}
             />
-          </Form.Group>
-          <Form.Input
-            className="mb-4"
-            placeholder="Email"
-            disabled
-            name="email"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <div className="flex flex-row-reverse">
-            <Button type="submit" color="black">
+          </Form.Item>
+          <Form.Item name="email">
+            <Input
+              placeholder="Email"
+              disabled
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+          </Form.Item>
+          <Form.Item className="justify-items-stretch">
+            <Button type="primary" htmlType="submit" className="mb-4" block>
               Save
             </Button>
-            <Button onClick={handleCancelButton} color="grey">
+            <Button htmlType="button" block onClick={handleCancelButton}>
               Cancel
             </Button>
-          </div>
+          </Form.Item>
         </Form>
       </div>
     </div>

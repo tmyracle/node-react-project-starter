@@ -1,6 +1,16 @@
 import React, { useState } from "react";
-import { Icon, Form } from "semantic-ui-react";
+//import { Icon, Form } from "semantic-ui-react";
+import { Form, Input, Button } from "antd";
 import axios from "axios";
+
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+
+const tailLayout = {
+  wrapperCol: { offset: 8, span: 16 },
+};
 
 const AuthConfirmForm = (props) => {
   const [verificationCode, setVerificationCode] = useState("");
@@ -42,6 +52,23 @@ const AuthConfirmForm = (props) => {
           <span className="text-xs font-bold">MT</span>
         </div>
       </div>
+      <Form {...layout} name="login" onFinish={handleSubmit}>
+        <Form.Item label="Verification code" name="verificationCode">
+          <Input onChange={handleVerificiationCodeChange} />
+        </Form.Item>
+        <Form.Item {...tailLayout}>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
+  );
+};
+
+export default AuthConfirmForm;
+
+/*
       <Form onSubmit={handleSubmit}>
         <Form.Input
           fluid
@@ -56,8 +83,4 @@ const AuthConfirmForm = (props) => {
           Confirm
         </Form.Button>
       </Form>
-    </div>
-  );
-};
-
-export default AuthConfirmForm;
+ */

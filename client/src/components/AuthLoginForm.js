@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Icon, Form } from "semantic-ui-react";
+//import { Icon, Form } from "semantic-ui-react";
+import { Form, Input, Button } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import axios from "axios";
 
 const AuthLoginForm = (props) => {
@@ -48,7 +50,49 @@ const AuthLoginForm = (props) => {
           <span className="text-xs font-bold">MT</span>
         </div>
       </div>
-      <Form onSubmit={handleSubmit}>
+      <Form name="login" onFinish={handleSubmit}>
+        <Form.Item
+          name="email"
+          rules={[
+            { required: true, message: "Please enter your email address" },
+          ]}
+        >
+          <Input
+            prefix={<UserOutlined className="site-form-item-icon" />}
+            placeholder="Email"
+            onChange={handleEmailChange}
+          />
+        </Form.Item>
+        <Form.Item
+          name="firstName"
+          rules={[{ required: true, message: "Please enter your first name" }]}
+        >
+          <Input placeholder="First name" onChange={handleFirstNameChange} />
+        </Form.Item>
+        <Form.Item
+          name="lastName"
+          rules={[{ required: true, message: "Please enter your last name" }]}
+        >
+          <Input placeholder="Last name" onChange={handleLastNameChange} />
+        </Form.Item>
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="login-form-button"
+          >
+            Sign in
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
+  );
+};
+
+export default AuthLoginForm;
+
+/**
+ * <Form onSubmit={handleSubmit}>
         <Form.Field>
           <Form.Input
             fluid
@@ -88,8 +132,4 @@ const AuthLoginForm = (props) => {
           Login
         </Form.Button>
       </Form>
-    </div>
-  );
-};
-
-export default AuthLoginForm;
+ */

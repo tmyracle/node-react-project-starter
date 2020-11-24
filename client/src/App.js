@@ -11,6 +11,7 @@ import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
 import LogIn from "./pages/LogIn";
 import Account from "./pages/Account";
+import AppLayout from "./pages/AppLayout";
 import { useAuth } from "./lib/authHandler";
 
 const App = () => {
@@ -25,6 +26,9 @@ const App = () => {
               <Dashboard />
             </Route>
             <Route path="/account">{user && <Account user={user} />}</Route>
+            <Route path="/layout">
+              <AppLayout />
+            </Route>
             <Route path="/*">
               <Redirect to="/dashboard" />
             </Route>

@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Button } from "semantic-ui-react";
+//import { Link } from "react-router-dom";
+import { Button } from "antd";
 import { useAuth } from "../lib/authHandler";
 
 const LandingPage = () => {
@@ -12,17 +12,9 @@ const LandingPage = () => {
         <span className="font-bold">Manager Tools:</span> a collection of
         helpful tools for managers.
       </div>
-      {!isAuthenticated && (
-        <Button as={Link} to="/login">
-          Log in
-        </Button>
-      )}
+      {!isAuthenticated && <Button href="/login">Log in</Button>}
 
-      {isAuthenticated && (
-        <Button as={Link} to="/dashboard">
-          View dashboard
-        </Button>
-      )}
+      {isAuthenticated && <Button href="/dashboard">View dashboard</Button>}
     </div>
   );
 };
