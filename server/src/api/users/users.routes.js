@@ -18,4 +18,21 @@ router.get("/", async (req, res) => {
   res.json(users);
 });
 
+router.post("/update", async (req, res, next) =>{
+  const {user_id, first_name, last_name} = req.body;
+
+  try {
+    const updatedUser = await User.query().patchAndFetchById(user_id, {
+      first_name,
+      last_name
+    });
+
+    res.json({
+      user: updatedUser
+    })
+  } catch(error) {
+    next(error);
+  }
+})
+
 module.exports = router;

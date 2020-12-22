@@ -59,7 +59,7 @@ const AppLayout = () => {
               minHeight: 280,
             }}
           >
-            Content
+            This is a basic authenticated experience structure with navigation.
           </Content>
         </Layout>
       </Layout>

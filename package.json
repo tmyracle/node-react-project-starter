@@ -1,7 +1,7 @@
 {
-  "name": "manager-tools",
+  "name": "node-react-project-starter",
   "version": "1.0.0",
-  "description": "A collection of tools to help managers operate more efficiently:",
+  "description": "A base setup for building web apps in node and react",
   "main": "index.js",
   "dependencies": {
     "concurrently": "^5.3.0"
@@ -13,13 +13,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tmyracle/manager-tools.git"
+    "url": "git+https://github.com/tmyracle/node-react-project-starter.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tmyracle/manager-tools/issues"
+    "url": "https://github.com/tmyracle/node-react-project-starter/issues"
   },
-  "homepage": "https://github.com/tmyracle/manager-tools#readme"
+  "homepage": "https://github.com/tmyracle/node-react-project-starter#readme"
 }

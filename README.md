@@ -1,11 +1,13 @@
-# Manager Tools
+# Node/React Project Starter
 
-A collection of tools to help managers operate more efficiently:
+Bootstrap a web app project:
 
 - Express / NodeJS backend
 - Postgres
 - React
-- Stripe for payments (maybe)
+- Ant Design Component Kit for UI
+- Tailwind CSS for styles
 
+By default the client runs on localhost:3000 and the API runs on localhost:5000
 Database is run using a docker image.  
 API is not containerized at this point.

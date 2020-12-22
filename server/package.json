@@ -1,7 +1,7 @@
 {
-  "name": "manager-tools",
+  "name": "server",
   "version": "0.0.1",
-  "description": "Backend for management tools",
+  "description": "Server for node/react kit",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -16,7 +16,7 @@
   "author": "Tyler Myracle",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tmyracle/manager-tools"
+    "url": "https://github.com/tmyracle/node-react-project-starter"
   },
   "license": "MIT",
   "dependencies": {

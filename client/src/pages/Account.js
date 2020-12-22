@@ -1,20 +1,34 @@
 import React, { useState } from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
 //import { Link } from "react-router-dom";
-//import { useAuth } from "../lib/authHandler";
+import { useAuth } from "../lib/authHandler";
+import axios from "axios";
 
 const Account = (props) => {
   const [firstName, setFirstName] = useState(props.user.first_name);
   const [lastName, setLastName] = useState(props.user.last_name);
   const [email, setEmail] = useState(props.user.email);
+  const [user] = useState(useAuth().user);
 
-  const handleCancelButton = () => {
-    console.log("I'm gonna cancel the form action.");
-  };
+  const handleSubmit = async () => {
+    const payload = {
+      first_name: firstName,
+      last_name: lastName,
+      user_id: user.id,
+    }
 
-  const handleSubmit = (values) => {
-    console.log("Gonna submit the form now!");
-    console.log(values);
+    const res = await axios.post(
+      `http://${process.env.REACT_APP_API_DOMAIN}/api/v1/users/update`,
+      payload
+    );
+
+    if (res.status === 200) {
+      setFirstName(res.data.user.first_name);
+      setLastName(res.data.user.last_name);
+      message.success("Account updated")
+    } else {
+      message.error("Something went wrong")
+    }
   };
 
   if (!props.user) {
@@ -65,7 +79,7 @@ const Account = (props) => {
             <Button type="primary" htmlType="submit" className="mb-4" block>
               Save
             </Button>
-            <Button htmlType="button" block onClick={handleCancelButton}>
+            <Button htmlType="button" block href="/dashboard">
               Cancel
             </Button>
           </Form.Item>

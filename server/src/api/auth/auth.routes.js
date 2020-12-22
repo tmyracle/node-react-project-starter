@@ -78,11 +78,14 @@ router.get("/is_authenticated", async (req, res, next) => {
   try {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
-    if (token == null) res.json({ isAuthenticated: false });
+    //if (token == null) res.json({ isAuthenticated: false });
 
     jsonWebToken.verify(token, process.env.JWT_SECRET_TOKEN, (err, user) => {
-      if (err) res.json({ isAuthenticated: false });
-      res.json({ isAuthenticated: true });
+      if (err) {
+        res.json({ isAuthenticated: false });
+      } else {
+        res.json({ isAuthenticated: true });
+      }
     });
   } catch (error) {
     next(error);

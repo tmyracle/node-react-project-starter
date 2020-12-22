@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-//import { Icon, Form } from "semantic-ui-react";
 import { Form, Input, Button } from "antd";
 import axios from "axios";
 
@@ -46,10 +45,10 @@ const AuthConfirmForm = (props) => {
     <div className="p-6 login-container bg-white rounded-lg shadow-lg">
       <div className="login-header mb-6 justify-between overflow-hidden">
         <span className="text-xl font-bold" style={{ lineHeight: "42px" }}>
-          Manager Tools Login
+          Login
         </span>
         <div className="logo rounded-full h-12 w-12 flex items-center justify-center bg-black text-white float-right">
-          <span className="text-xs font-bold">MT</span>
+          <span className="text-xs font-bold">TM</span>
         </div>
       </div>
       <Form {...layout} name="login" onFinish={handleSubmit}>
@@ -67,20 +66,3 @@ const AuthConfirmForm = (props) => {
 };
 
 export default AuthConfirmForm;
-
-/*
-      <Form onSubmit={handleSubmit}>
-        <Form.Input
-          fluid
-          className="mb-4"
-          placeholder="Verification code"
-          name="verificationCode"
-          value={verificationCode}
-          onChange={handleVerificiationCodeChange}
-        />
-        <Form.Button fluid type="submit" color="black">
-          <Icon name="lock" style={{ borderColor: "white", opacity: 1 }} />{" "}
-          Confirm
-        </Form.Button>
-      </Form>
- */
