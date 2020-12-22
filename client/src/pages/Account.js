@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Form, Input, Button, message } from "antd";
-//import { Link } from "react-router-dom";
 import { useAuth } from "../lib/authHandler";
 import axios from "axios";
 
@@ -14,12 +13,14 @@ const Account = (props) => {
     const payload = {
       first_name: firstName,
       last_name: lastName,
-      user_id: user.id,
     }
 
     const res = await axios.post(
       `http://${process.env.REACT_APP_API_DOMAIN}/api/v1/users/update`,
-      payload
+      payload,
+      {headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      }},
     );
 
     if (res.status === 200) {

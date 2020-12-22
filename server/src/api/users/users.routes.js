@@ -1,6 +1,7 @@
 const express = require("express");
 
 const User = require("./users.model");
+const { authenticateToken } = require("../../middlewares");
 
 const router = express.Router();
 
@@ -18,8 +19,9 @@ router.get("/", async (req, res) => {
   res.json(users);
 });
 
-router.post("/update", async (req, res, next) =>{
-  const {user_id, first_name, last_name} = req.body;
+router.post("/update", authenticateToken, async (req, res, next) =>{
+  const {first_name, last_name} = req.body;
+  const user_id = req.user.id;
 
   try {
     const updatedUser = await User.query().patchAndFetchById(user_id, {
