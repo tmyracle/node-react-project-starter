@@ -23,6 +23,7 @@ const Account = (props) => {
     if (res.status === 200) {
       setFirstName(res.data.user.first_name);
       setLastName(res.data.user.last_name);
+      props.onChange(res.data.user);
       message.success("Account updated");
     } else {
       message.error("Something went wrong");

@@ -12,7 +12,7 @@ const App = () => {
 
   return (
     <div>
-      {isAuthenticated === true && user && <AuthenticatedApp user={user} />}
+      {isAuthenticated === true && user && <AuthenticatedApp />}
       {isAuthenticated === false && (
         <Router>
           <Switch>

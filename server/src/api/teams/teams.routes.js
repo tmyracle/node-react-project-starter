@@ -20,8 +20,6 @@ router.post("/create", authenticateToken, async (req, res, next) => {
     owner_id: req.user.id,
   };
 
-  console.log(newTeam);
-
   try {
     const createdTeam = await Team.query().insert(newTeam);
     await createdTeam.$relatedQuery("users").relate(req.user.id);

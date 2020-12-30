@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Layout } from "antd";
 import {
   BrowserRouter as Router,
@@ -9,17 +10,41 @@ import {
 import Dashboard from "./pages/Dashboard";
 import Account from "./pages/Account";
 import Navigation from "./components/Navigation";
-import { useAuth } from "./lib/authHandler";
+import { withToken } from "./lib/authHandler";
 
 const { Content } = Layout;
 
 const AuthenticatedApp = () => {
-  const { user } = useAuth();
+  const [user, setUser] = useState();
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get(
+          `http://${process.env.REACT_APP_API_DOMAIN}/api/v1/auth/is_authenticated`,
+          withToken()
+        );
+        if (res.data.isAuthenticated) {
+          setUser(res.data.user);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchUser();
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.replace(`http://${process.env.REACT_APP_CLIENT_DOMAIN}/`);
   };
+
+  const handleChange = (updatedUser) => {
+    setUser(updatedUser);
+  };
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Router>
@@ -29,10 +54,10 @@ const AuthenticatedApp = () => {
           <Content style={{ margin: "24px 16px 0", flexGrow: 1 }}>
             <Switch>
               <Route path="/dashboard">
-                <Dashboard />
+                <Dashboard user={user} />
               </Route>
               <Route path="/account">
-                <Account user={user} />
+                <Account user={user} onChange={handleChange} />
               </Route>
               <Route path="/*">
                 <Redirect to="/dashboard" />
