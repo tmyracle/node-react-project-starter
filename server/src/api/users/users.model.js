@@ -5,7 +5,7 @@ const schema = require("./users.schema.json");
 
 class User extends Model {
   static get tableName() {
-    return tableNames.user;
+    return tableNames.users;
   }
 
   static get jsonSchema() {

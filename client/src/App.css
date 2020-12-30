@@ -1,1 +1,9 @@
 @import "~antd/dist/antd.css";
+
+.anticon {
+  display: inline-flex !important;
+}
+
+.logo-text {
+  font-family: "Ubuntu", sans-serif;
+}

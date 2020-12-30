@@ -8,7 +8,7 @@ const { addDefaultColumns, email } = require("../../src/lib/tableUtils");
 
 exports.up = async (knex) => {
   await Promise.all([
-    knex.schema.createTable(tableNames.user, (table) => {
+    knex.schema.createTable(tableNames.users, (table) => {
       table.increments().notNullable();
       email(table, "email").notNullable().unique();
       table.string("first_name");
@@ -22,7 +22,7 @@ exports.up = async (knex) => {
 
 exports.down = async (knex) => {
   await Promise.all(
-    [tableNames.user].map((tableName) =>
+    [tableNames.users].map((tableName) =>
       knex.schema.dropTableIfExists(tableName)
     )
   );

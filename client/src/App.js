@@ -1,17 +1,10 @@
 import React from "react";
 import "./App.css";
 import "./tailwind.output.css";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
-import Dashboard from "./pages/Dashboard";
 import LogIn from "./pages/LogIn";
-import Account from "./pages/Account";
-import AppLayout from "./pages/AppLayout";
+import AuthenticatedApp from "./AuthenticatedApp";
 import { useAuth } from "./lib/authHandler";
 
 const App = () => {
@@ -19,23 +12,7 @@ const App = () => {
 
   return (
     <div>
-      {isAuthenticated === true && (
-        <Router>
-          <Switch>
-            <Route path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route path="/account">{user && <Account user={user} />}</Route>
-            <Route path="/layout">
-              <AppLayout />
-            </Route>
-            <Route path="/*">
-              <Redirect to="/dashboard" />
-            </Route>
-          </Switch>
-        </Router>
-      )}
-
+      {isAuthenticated === true && user && <AuthenticatedApp user={user} />}
       {isAuthenticated === false && (
         <Router>
           <Switch>

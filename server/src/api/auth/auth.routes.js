@@ -78,47 +78,33 @@ router.get("/is_authenticated", async (req, res, next) => {
   try {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
-    //if (token == null) res.json({ isAuthenticated: false });
 
-    jsonWebToken.verify(token, process.env.JWT_SECRET_TOKEN, (err, user) => {
-      if (err) {
-        res.json({ isAuthenticated: false });
-      } else {
-        res.json({ isAuthenticated: true });
-      }
-    });
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.get("/current_user", authenticateToken, async (req, res, next) => {
-  try {
-    const authHeader = req.headers["authorization"];
-    const token = authHeader && authHeader.split(" ")[1];
-    if (token == null) {
-      const error = new Error("No token provided");
-      next(error);
-    }
     jsonWebToken.verify(
       token,
       process.env.JWT_SECRET_TOKEN,
-      async (err, decoded) => {
+      (err, decodedToken) => {
         if (err) {
-          next(err);
+          res.json({ isAuthenticated: false });
+        } else {
+          const user = User.query()
+            .findById(decodedToken.id)
+            .select(
+              "id",
+              "first_name",
+              "last_name",
+              "email",
+              "date_of_birth",
+              "created_at",
+              "updated_at"
+            )
+            .then((user) => {
+              if (user) {
+                res.json({ isAuthenticated: true, user: user });
+              } else {
+                res.json({ isAuthenticated: false });
+              }
+            });
         }
-        const user = await User.query()
-          .findById(decoded.id)
-          .select(
-            "id",
-            "first_name",
-            "last_name",
-            "email",
-            "date_of_birth",
-            "created_at",
-            "updated_at"
-          );
-        res.json({ user });
       }
     );
   } catch (error) {

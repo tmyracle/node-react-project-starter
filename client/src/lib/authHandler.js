@@ -13,23 +13,11 @@ export const AuthProvider = ({ children }) => {
       try {
         const res = await axios.get(
           `http://${process.env.REACT_APP_API_DOMAIN}/api/v1/auth/is_authenticated`,
-          {
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token"),
-            },
-          }
+          withToken()
         );
         const isAuthenticatedStatus = res.data.isAuthenticated;
         setIsAuthenticated(isAuthenticatedStatus);
-        if (isAuthenticatedStatus) {
-          const res = await axios.get(
-            `http://${process.env.REACT_APP_API_DOMAIN}/api/v1/auth/current_user`,
-            {
-              headers: {
-                Authorization: "Bearer " + localStorage.getItem("token"),
-              },
-            }
-          );
+        if (isAuthenticatedStatus === true) {
           setUser(res.data.user);
         }
       } catch (error) {
@@ -49,4 +37,12 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+export const withToken = () => {
+  return {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
 };

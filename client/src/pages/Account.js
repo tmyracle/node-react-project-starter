@@ -1,34 +1,31 @@
 import React, { useState } from "react";
 import { Form, Input, Button, message } from "antd";
-import { useAuth } from "../lib/authHandler";
+import { useAuth, withToken } from "../lib/authHandler";
 import axios from "axios";
 
 const Account = (props) => {
   const [firstName, setFirstName] = useState(props.user.first_name);
   const [lastName, setLastName] = useState(props.user.last_name);
   const [email, setEmail] = useState(props.user.email);
-  const [user] = useState(useAuth().user);
 
   const handleSubmit = async () => {
     const payload = {
       first_name: firstName,
       last_name: lastName,
-    }
+    };
 
     const res = await axios.post(
       `http://${process.env.REACT_APP_API_DOMAIN}/api/v1/users/update`,
       payload,
-      {headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      }},
+      withToken()
     );
 
     if (res.status === 200) {
       setFirstName(res.data.user.first_name);
       setLastName(res.data.user.last_name);
-      message.success("Account updated")
+      message.success("Account updated");
     } else {
-      message.error("Something went wrong")
+      message.error("Something went wrong");
     }
   };
 
@@ -38,9 +35,7 @@ const Account = (props) => {
 
   return (
     <div className="p-6 bg-white rounded-lg max-w-lg mx-auto mt-24">
-      <div className="text-center text-2xl font-bold mb-6">
-        Welcome, {firstName}!
-      </div>
+      <div className="text-2xl font-bold mb-6">Manage Account</div>
       <div className="text-center">
         <Form
           size="big"

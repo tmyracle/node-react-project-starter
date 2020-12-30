@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "title": "Team",
+  "description": "Team that multiple users can belong to",
+  "required": ["name", "owner_id"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "integer",
+      "title": "The database ID of the team."
+    },
+    "name": {
+      "$id": "#/properties/name",
+      "type": "string",
+      "title": "Name of the team.",
+      "examples": ["Manufacturing Product Team", "Design Team"]
+    },
+    "owner_id": {
+      "$id": "#/properties/owner_id",
+      "type": "integer",
+      "title": "User id of whoever created the team"
+    },
+    "created_at": {
+      "$id": "#/properties/created_at",
+      "type": "string",
+      "title": "The creation date of the user."
+    },
+    "updated_at": {
+      "$id": "#/properties/updated_at",
+      "type": "string",
+      "title": "The date the user was last updated."
+    }
+  }
+}

@@ -36,8 +36,6 @@ const AuthConfirmForm = (props) => {
       window.location.replace(
         `http://${process.env.REACT_APP_CLIENT_DOMAIN}/dashboard`
       );
-    } else {
-      console.log(res);
     }
   };
 

@@ -1,3 +1,5 @@
 module.exports = {
-  user: "user",
+  users: "users",
+  teams: "teams",
+  users_teams: "users_teams",
 };
