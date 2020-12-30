@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Input, Button, message } from "antd";
-import { useAuth, withToken } from "../lib/authHandler";
+import { withToken } from "../lib/authHandler";
 import axios from "axios";
 
 const Account = (props) => {

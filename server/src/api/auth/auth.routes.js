@@ -20,8 +20,6 @@ router.post("/start", async (req, res, next) => {
       currentUser = await User.query().insert(newUser);
     }
 
-    console.log(currentUser);
-
     const code = Math.floor(Math.random() * (999999 - 100001) + 100000);
     console.log(`Here is your one time use code: ${code}`);
 
@@ -56,6 +54,8 @@ router.post("/confirm", async (req, res, next) => {
       res.sendStatus(403);
       throw error;
     }
+
+    await User.query().patch({ code: "" }).findById(user.id);
 
     const payload = {
       id: user.id,
