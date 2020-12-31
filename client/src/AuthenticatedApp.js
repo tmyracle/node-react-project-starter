@@ -7,8 +7,8 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
-import Account from "./pages/Account";
+import Dashboard from "./pages/authenticated/Dashboard";
+import Account from "./pages/authenticated/Account";
 import Navigation from "./components/Navigation";
 import { withToken } from "./lib/authHandler";
 

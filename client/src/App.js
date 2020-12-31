@@ -2,8 +2,11 @@ import React from "react";
 import "./App.css";
 import "./tailwind.output.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
-import LogIn from "./pages/LogIn";
+import LandingPage from "./pages/public/LandingPage";
+import About from "./pages/public/About";
+import Features from "./pages/public/Features";
+import Pricing from "./pages/public/Pricing";
+import LogIn from "./pages/public/LogIn";
 import AuthenticatedApp from "./AuthenticatedApp";
 import { useAuth } from "./lib/authHandler";
 
@@ -18,6 +21,15 @@ const App = () => {
           <Switch>
             <Route path="/login">
               <LogIn />
+            </Route>
+            <Route path="/features">
+              <Features />
+            </Route>
+            <Route path="/pricing">
+              <Pricing />
+            </Route>
+            <Route path="/about">
+              <About />
             </Route>
             <Route path="/">
               <LandingPage />

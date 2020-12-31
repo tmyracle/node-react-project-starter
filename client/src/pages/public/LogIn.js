@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import AuthLoginForm from "../components/AuthLoginForm";
-import AuthConfirmForm from "../components/AuthConfirmForm";
+import AuthLoginForm from "../../components/AuthLoginForm";
+import AuthConfirmForm from "../../components/AuthConfirmForm";
 
 const LogIn = () => {
   const [authStep, setAuthStep] = useState(0);
