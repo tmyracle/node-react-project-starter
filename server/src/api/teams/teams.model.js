@@ -18,6 +18,8 @@ class Team extends Model {
       owner: {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
+        filter: (query) =>
+          query.select("users.id", "email", "first_name", "last_name"),
         join: {
           from: `${tableNames.teams}.owner_id`,
           to: `${tableNames.users}.id`,
@@ -26,6 +28,8 @@ class Team extends Model {
       users: {
         relation: Model.ManyToManyRelation,
         modelClass: User,
+        filter: (query) =>
+          query.select("users.id", "email", "first_name", "last_name"),
         join: {
           from: `${tableNames.teams}.id`,
           through: {
