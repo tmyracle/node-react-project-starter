@@ -4,11 +4,13 @@ const jsonWebToken = require("jsonwebtoken");
 const jwt = require("../../lib/jwt");
 const User = require("../users/users.model");
 const { authenticateToken } = require("../../middlewares");
+const mailer = require("../../lib/mailer");
 
 const router = express.Router();
 
 router.post("/start", async (req, res, next) => {
   const { email, first_name, last_name } = req.body;
+  let code;
   try {
     let currentUser = await User.query().where("email", email).first();
     if (!currentUser) {
@@ -20,7 +22,7 @@ router.post("/start", async (req, res, next) => {
       currentUser = await User.query().insert(newUser);
     }
 
-    const code = Math.floor(Math.random() * (999999 - 100001) + 100000);
+    code = Math.floor(Math.random() * (999999 - 100001) + 100000);
     console.log(`Here is your one time use code: ${code}`);
 
     const hashedCode = await bcrypt.hash(code.toString(), 12);
@@ -32,8 +34,16 @@ router.post("/start", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-  // Send email with code in it
-  // Have a default code valid length (10 minutes?)
+
+  let mailTransporter = await mailer.initTransporter().catch(console.error);
+  const sender = '"Fred Foo 👻" <foo@example.com>';
+  const receiver = email;
+  const subject = "Login Code";
+  const text = `Your one time use login code is: ${code}`;
+
+  mailer
+    .send(mailTransporter, sender, receiver, subject, text)
+    .catch(console.error);
 });
 
 router.post("/confirm", async (req, res, next) => {
