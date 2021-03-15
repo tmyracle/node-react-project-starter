@@ -1,0 +1,31 @@
+.landingContainer {
+  padding: 1rem 4rem;
+  background-color: white;
+  width: 100vw;
+  height: 100vh;
+}
+
+.navItem {
+  padding: 10px 20px;
+  letter-spacing: 0.2px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.ctaButton {
+  font-family: "Noto Sans JP";
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.4px;
+  border-radius: 1rem;
+  padding: 3px 18px 6px 18px;
+}
+
+.landingFont {
+  font-family: "Noto Sans JP";
+}
+
+.heroText {
+  font-size: 4rem;
+  font-weight: bold;
+}

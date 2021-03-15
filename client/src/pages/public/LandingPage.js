@@ -1,34 +1,105 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
+import "./public.css";
 
 const LandingPage = () => {
+  const [menuVisbile, setMenuVisible] = useState(false);
+
   return (
-    <div className="landing-container" style={styles.landingContainer}>
-      <nav className="landing-nav">
-        <div className="landing-link-container">
-          <div className="landing-nav-link">Features</div>
-          <div className="landing-nav-link">Pricing</div>
-          <div className="landing-nav-link">About</div>
-          <Button>
-            <Link to="/login">Login</Link>
-          </Button>
-        </div>
+    <div className="bg-white w-screen h-screen sm:px-16 sm:py-4 px-4 py-2">
+      <nav className="flex justify-between items-center min-h-56 p-3 mb-8">
+        <div className="landingFont font-bold text-2xl">HackKit</div>
+        <nav>
+          <ul className="sm:flex hidden items-center m-0 p-0 list-none landingFont">
+            <li className="navItem">
+              <Link to="/features" className="hover:text-indigo-500">
+                Features
+              </Link>
+            </li>
+            <li className="navItem">
+              <Link to="/features" className="hover:text-indigo-500">
+                Use cases
+              </Link>
+            </li>
+            <li className="navItem">
+              <Link to="/pricing" className="hover:text-indigo-500">
+                Pricing
+              </Link>
+            </li>
+            <li className="navItem">
+              <Link to="/about" className="hover:text-indigo-500">
+                About
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        <nav>
+          <div className="sm:block hidden ctaButton bg-indigo-500 hover:bg-indigo-600 text-white hover:text-white border-indigo-600">
+            <Link className="hover:text-white" to="/login">
+              Login
+            </Link>
+          </div>
+          <div className="sm:hidden block relative">
+            <Button
+              className="bg-indigo-500 focus:bg-indigo-600 hover:bg-indigo-600 ctaButton border-none text-white focus:text-white hover:text-white"
+              to="/login"
+              onClick={() => setMenuVisible(menuVisbile ? false : true)}
+            >
+              Menu
+            </Button>
+            {menuVisbile ? (
+              <div className="navMenu flex-col absolute top-3 mt-1 right-0 bg-white border border-gray-300 rounded-lg shadow w-40">
+                <ul className="items-center text-center m-0 p-0 list-none landingFont">
+                  <li className="navItem">
+                    <Link to="/features" className="hover:text-indigo-500">
+                      Features
+                    </Link>
+                  </li>
+                  <li className="navItem">
+                    <Link to="/features" className="hover:text-indigo-500">
+                      Use cases
+                    </Link>
+                  </li>
+                  <li className="navItem">
+                    <Link to="/pricing" className="hover:text-indigo-500">
+                      Pricing
+                    </Link>
+                  </li>
+                  <li className="navItem">
+                    <Link to="/about" className="hover:text-indigo-500">
+                      About
+                    </Link>
+                  </li>
+                  <hr />
+                  <li className="navItem">
+                    <Link to="/login" className="hover:text-indigo-500">
+                      Login
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
+        </nav>
       </nav>
-      <div className="landing-body-container">
-        <div className="landing-hero-container mb-4">
-          <div
-            className="text-center mx-auto mb-4"
-            style={styles.landingHeroText}
-          >
+      <div className="landingBody">
+        <div className="landingHero mb-4">
+          <div className="heroText landingFont text-center mx-auto mb-4">
             Happy hacking starter kit
           </div>
           <div className="landing-hero-cta mx-auto text-center mb-2">
-            <Button type="primary" size="large" shape="round">
+            <Button
+              className="bg-green-500 text-white hover:bg-green-600 hover:text-white border-0"
+              size="large"
+              shape="round"
+            >
               Get started
             </Button>
           </div>
-          <div className="landing-hero-subtext mx-auto text-center text-xl">
+          <div className="landing-hero-subtext mx-auto text-center text-xl mt-4">
             Try it free for 14 days! No credit card required.
           </div>
         </div>
@@ -49,7 +120,10 @@ const LandingPage = () => {
           <div className="landing-feature-highlight p-4">Containerized</div>
         </div>
         <div className="landing-cta-break mx-auto text-center">
-          <Button type="primary" size="large">
+          <Button
+            className="bg-green-500 hover:bg-green-600 text-white hover:text-white border-0"
+            size="large"
+          >
             Here's CTA for Features page
           </Button>
         </div>
@@ -58,9 +132,10 @@ const LandingPage = () => {
   );
 };
 
+/*
 const styles = {
   landingContainer: {
-    padding: "4rem",
+    padding: "1rem 4rem",
     backgroundColor: "white",
   },
   landingHeroText: {
@@ -68,6 +143,42 @@ const styles = {
     fontSize: "4rem",
     fontWeight: "bold",
   },
+  navLogo: {
+    fontFamily: "Noto Sans JP",
+    fontSize: "1.4rem",
+    fontWeight: "bold",
+  },
+  navContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    minHeight: "56px",
+    padding: "12px",
+    marginBottom: "2rem",
+    fontFamily: "Noto Sans JP",
+  },
+  navList: {
+    display: "flex",
+    alignItems: "center",
+    margin: 0,
+    passing: 0,
+    listStyle: "none",
+  },
+  navItem: {
+    padding: "10px 20px",
+    letterSpacing: ".2px",
+    fontSize: "15px",
+    fontWeight: "bold",
+  },
+  ctaButton: {
+    fontFamily: "Noto Sans JP",
+    fontWeight: "500",
+    fontSize: "15px",
+    letterSpacing: ".4px",
+    borderRadius: "1rem",
+    padding: "3px 18px 6px 18px",
+  },
 };
+*/
 
 export default LandingPage;
