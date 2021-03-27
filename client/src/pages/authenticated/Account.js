@@ -14,11 +14,8 @@ const Account = (props) => {
       last_name: lastName,
     };
 
-    const res = await axios.post(
-      `http://${process.env.REACT_APP_API_DOMAIN}/api/v1/users/update`,
-      payload,
-      withToken()
-    );
+    //REACT_APP_API_DOMAIN
+    const res = await axios.post("/api/v1/users/update", payload, withToken());
 
     if (res.status === 200) {
       setFirstName(res.data.user.first_name);

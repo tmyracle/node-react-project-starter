@@ -7,12 +7,12 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState();
   const [user, setUser] = useState();
-
+  // REACT_APP_API
   useEffect(() => {
     const initAuth = async () => {
       try {
         const res = await axios.get(
-          `http://${process.env.REACT_APP_API_DOMAIN}/api/v1/auth/is_authenticated`,
+          "/api/v1/auth/is_authenticated",
           withToken()
         );
         const isAuthenticatedStatus = res.data.isAuthenticated;

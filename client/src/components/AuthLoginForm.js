@@ -27,10 +27,7 @@ const AuthLoginForm = (props) => {
       last_name: lastName,
     };
 
-    const res = await axios.post(
-      `http://${process.env.REACT_APP_API_DOMAIN}/api/v1/auth/start`,
-      payload
-    );
+    const res = await axios.post("/api/v1/auth/start", payload);
 
     if (res.status === 200) {
       props.onChange(res.data);

@@ -25,17 +25,12 @@ const AuthConfirmForm = (props) => {
       code: verificationCode,
     };
 
-    const res = await axios.post(
-      `http://${process.env.REACT_APP_API_DOMAIN}/api/v1/auth/confirm`,
-      payload
-    );
+    const res = await axios.post("/api/v1/auth/confirm", payload);
 
     if (res.status === 200) {
       const { token } = res.data;
       localStorage.setItem("token", token);
-      window.location.replace(
-        `http://${process.env.REACT_APP_CLIENT_DOMAIN}/dashboard`
-      );
+      window.location.replace("/dashboard");
     }
   };
 

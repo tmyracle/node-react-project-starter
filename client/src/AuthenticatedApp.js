@@ -20,7 +20,7 @@ const AuthenticatedApp = () => {
     const fetchUser = async () => {
       try {
         const res = await axios.get(
-          `http://${process.env.REACT_APP_API_DOMAIN}/api/v1/auth/is_authenticated`,
+          "/api/v1/auth/is_authenticated",
           withToken()
         );
         if (res.data.isAuthenticated) {
@@ -35,7 +35,7 @@ const AuthenticatedApp = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.replace(`http://${process.env.REACT_APP_CLIENT_DOMAIN}/`);
+    window.location.replace("/");
   };
 
   const handleChange = (updatedUser) => {
