@@ -1,5 +1,7 @@
 const path = require("path");
-require("dotenv").config({ path: path.resolve(__dirname, ".env") });
+process.env.NODE_ENV !== "production"
+  ? require("dotenv").config({ path: path.resolve(__dirname, ".env") })
+  : null;
 
 module.exports = {
   development: {
@@ -40,5 +42,6 @@ module.exports = {
     seeds: {
       directory: "./db/seeds",
     },
+    ssl: true,
   },
 };
