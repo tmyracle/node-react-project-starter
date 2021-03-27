@@ -2,8 +2,9 @@ const express = require("express");
 const morgan = require("morgan");
 const helmet = require("helmet");
 const cors = require("cors");
+const path = require("path");
 
-require("dotenv").config();
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 
 const middlewares = require("./middlewares");
 const api = require("./api");
@@ -30,14 +31,13 @@ app.use(morgan("dev"));
 app.use(helmet());
 app.use(cors(corsOptions));
 app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.json({
-    message: "Hello from the server",
-  });
-});
+app.use(express.static(path.resolve(__dirname, "../../client/build")));
 
 app.use("/api/v1", api);
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../../client/build", "index.html"));
+});
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);

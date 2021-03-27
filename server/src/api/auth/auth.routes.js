@@ -11,6 +11,7 @@ const router = express.Router();
 router.post("/start", async (req, res, next) => {
   const { email, first_name, last_name } = req.body;
   let code;
+
   try {
     let currentUser = await User.query().where("email", email).first();
     if (!currentUser) {
