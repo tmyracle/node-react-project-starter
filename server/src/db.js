@@ -8,6 +8,8 @@ const connectionConfig = knexConfig[environment];
 
 const connection = knex(connectionConfig);
 
+console.log(connection);
+
 Model.knex(connection);
 
 module.exports = connection;
