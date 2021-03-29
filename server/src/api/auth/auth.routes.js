@@ -9,18 +9,23 @@ const mailer = require("../../lib/mailer");
 const router = express.Router();
 
 router.post("/start", async (req, res, next) => {
-  const { email, first_name, last_name } = req.body;
+  const { first_name, last_name } = req.body;
+  const email = req.body.email.toLowerCase();
   let code;
 
   try {
     let currentUser = await User.query().where("email", email).first();
-    if (!currentUser) {
+    if (!currentUser && first_name && last_name) {
       const newUser = {
         email,
         first_name,
         last_name,
       };
       currentUser = await User.query().insert(newUser);
+    } else if (!currentUser && (!first_name || !last_name)) {
+      const error = new Error("Could not find user with that email address.");
+      //res.sendStatus(403);
+      throw error;
     }
 
     code = Math.floor(Math.random() * (999999 - 100001) + 100000);
@@ -31,20 +36,20 @@ router.post("/start", async (req, res, next) => {
       .$query()
       .patchAndFetch({ code: hashedCode });
 
+    let mailTransporter = await mailer.initTransporter().catch(console.error);
+    const sender = '"Fred Foo 👻" <foo@example.com>';
+    const receiver = email;
+    const subject = "Login Code";
+    const text = `Your one time use login code is: ${code}`;
+
+    mailer
+      .send(mailTransporter, sender, receiver, subject, text)
+      .catch(console.error);
+
     res.json({ user: updatedUser });
   } catch (error) {
     next(error);
   }
-
-  let mailTransporter = await mailer.initTransporter().catch(console.error);
-  const sender = '"Fred Foo 👻" <foo@example.com>';
-  const receiver = email;
-  const subject = "Login Code";
-  const text = `Your one time use login code is: ${code}`;
-
-  mailer
-    .send(mailTransporter, sender, receiver, subject, text)
-    .catch(console.error);
 });
 
 router.post("/confirm", async (req, res, next) => {

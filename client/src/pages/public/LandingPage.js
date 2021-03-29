@@ -10,7 +10,7 @@ const LandingPage = () => {
       <div className="landingBody">
         <div className="landingHero mb-4">
           <div className="heroText landingFont text-center mx-auto mb-4">
-            Happy hacking starter kit
+            SaaS starter kit
           </div>
           <div className="landing-hero-cta mx-auto text-center mb-2">
             <Button

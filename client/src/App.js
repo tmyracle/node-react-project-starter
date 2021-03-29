@@ -7,6 +7,7 @@ import About from "./pages/public/About";
 import Features from "./pages/public/Features";
 import Pricing from "./pages/public/Pricing";
 import LogIn from "./pages/public/LogIn";
+import SignUp from "./pages/public/SignUp";
 import AuthenticatedApp from "./AuthenticatedApp";
 import { useAuth } from "./lib/authHandler";
 
@@ -21,6 +22,9 @@ const App = () => {
           <Switch>
             <Route path="/login">
               <LogIn />
+            </Route>
+            <Route path="/signup">
+              <SignUp />
             </Route>
             <Route path="/features">
               <Features />

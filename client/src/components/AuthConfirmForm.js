@@ -2,15 +2,6 @@ import React, { useState } from "react";
 import { Form, Input, Button } from "antd";
 import axios from "axios";
 
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
-
-const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
-};
-
 const AuthConfirmForm = (props) => {
   const [verificationCode, setVerificationCode] = useState("");
   const email = props.email;
@@ -40,15 +31,18 @@ const AuthConfirmForm = (props) => {
         <span className="text-xl font-bold" style={{ lineHeight: "42px" }}>
           Login
         </span>
-        <div className="logo rounded-full h-12 w-12 flex items-center justify-center bg-black text-white float-right">
-          <span className="text-xs font-bold">TM</span>
-        </div>
       </div>
-      <Form {...layout} name="login" onFinish={handleSubmit}>
-        <Form.Item label="Verification code" name="verificationCode">
-          <Input onChange={handleVerificiationCodeChange} />
+      <div className="mb-4 text-gray-700">
+        Check your email for a one-time use verification code
+      </div>
+      <Form layout="vertical" name="login" onFinish={handleSubmit}>
+        <Form.Item name="verificationCode">
+          <Input
+            placeholder="Verification code"
+            onChange={handleVerificiationCodeChange}
+          />
         </Form.Item>
-        <Form.Item {...tailLayout}>
+        <Form.Item>
           <Button type="primary" htmlType="submit">
             Submit
           </Button>

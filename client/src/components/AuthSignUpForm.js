@@ -1,33 +1,38 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Form, Input, Button } from "antd";
-import { MailOutlined } from "@ant-design/icons";
 import axios from "axios";
 
-const AuthLoginForm = (props) => {
+const AuthSignUpForm = (props) => {
   const [email, setEmail] = useState("");
-  const [errorMessage, setErrorMessage] = useState();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
 
+  const handleFirstNameChange = (e) => {
+    setFirstName(e.target.value);
+  };
+
+  const handleLastNameChange = (e) => {
+    setLastName(e.target.value);
+  };
+
   const handleSubmit = async () => {
     const payload = {
       email: email,
+      first_name: firstName,
+      last_name: lastName,
     };
 
-    try {
-      const res = await axios.post("/api/v1/auth/start", payload);
-      if (res.status === 200) {
-        props.onChange(res.data);
-      }
-    } catch (err) {
-      if (err.response.data.message) {
-        setErrorMessage(err.response.data.message);
-      } else {
-        setErrorMessage("Something went wrong");
-      }
+    const res = await axios.post("/api/v1/auth/start", payload);
+
+    if (res.status === 200) {
+      props.onChange(res.data);
+    } else {
+      console.log("Error starting authentication");
     }
   };
 
@@ -36,26 +41,31 @@ const AuthLoginForm = (props) => {
       <div className="p-6 login-container bg-white rounded-lg shadow-lg">
         <div className="login-header mb-6 justify-between overflow-hidden">
           <span className="text-xl font-bold" style={{ lineHeight: "42px" }}>
-            Welcome back
+            Sign up
           </span>
         </div>
-        {errorMessage ? (
-          <div className="text-red-500">{errorMessage}</div>
-        ) : (
-          <></>
-        )}
         <Form name="login" onFinish={handleSubmit}>
+          <Form.Item
+            name="firstName"
+            rules={[
+              { required: true, message: "Please enter your first name" },
+            ]}
+          >
+            <Input placeholder="First name" onChange={handleFirstNameChange} />
+          </Form.Item>
+          <Form.Item
+            name="lastName"
+            rules={[{ required: true, message: "Please enter your last name" }]}
+          >
+            <Input placeholder="Last name" onChange={handleLastNameChange} />
+          </Form.Item>
           <Form.Item
             name="email"
             rules={[
               { required: true, message: "Please enter your email address" },
             ]}
           >
-            <Input
-              prefix={<MailOutlined className="site-form-item-icon mr-1" />}
-              placeholder="Email"
-              onChange={handleEmailChange}
-            />
+            <Input placeholder="Email" onChange={handleEmailChange} />
           </Form.Item>
           <Form.Item>
             <Button
@@ -63,22 +73,22 @@ const AuthLoginForm = (props) => {
               htmlType="submit"
               className="login-form-button"
             >
-              Continue
+              Create account
             </Button>
           </Form.Item>
         </Form>
       </div>
       <div className="mt-4 pl-4">
-        Don't have an account?{" "}
+        Have an account?{" "}
         <Link
           className="text-blue-500 hover:text-blue-700 hover:font-medium"
-          to="/signup"
+          to="/login"
         >
-          Sign up
+          Log in
         </Link>
       </div>
     </div>
   );
 };
 
-export default AuthLoginForm;
+export default AuthSignUpForm;

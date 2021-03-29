@@ -10,7 +10,7 @@ const LandingHeader = () => {
     <nav className="flex justify-between items-center min-h-56 p-3 mb-8">
       <div className="landingFont font-bold text-2xl">
         <Link to="/" className="hover:text-current">
-          HackKit
+          SaaS Kit
         </Link>
       </div>
       <nav>
